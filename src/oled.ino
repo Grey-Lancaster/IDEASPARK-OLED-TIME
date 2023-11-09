@@ -6,8 +6,8 @@
 #include <NTPClient.h>
 
 // Replace with your network details
-const char* ssid = "fireplace";
-const char* password = "";
+const char* ssid = "your ssid";
+const char* password = "your password";
 
 // OLED display settings
 #define SCREEN_WIDTH 128
