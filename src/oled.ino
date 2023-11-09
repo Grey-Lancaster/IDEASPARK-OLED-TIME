@@ -4,10 +4,11 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <NTPClient.h>
+#include <Fonts/FreeSans9pt7b.h>  // Include the header file for the custom font
 
 // Replace with your network details
-const char* ssid = "your ssid";
-const char* password = "your password";
+const char* ssid = "shop2";
+const char* password = "mine0313";
 
 // OLED display settings
 #define SCREEN_WIDTH 128
@@ -22,8 +23,9 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", -5 * 3600, 60000); // New York UTC offset -5 hours
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200, SERIAL_8N1);
 
+  display.setFont(&FreeSans9pt7b);  // Set the custom font
   // Start I2C communication for OLED
   Wire.begin(D6, D5); // GPIO12, GPIO14 respectively
   if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDRESS)) {
@@ -40,8 +42,20 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    yield(); // Helps to maintain background tasks
   }
   Serial.println("WiFi connected");
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0,12);
+  display.println("Connected:");//print wi-fi connected on OLED
+  IPAddress theIP = WiFi.localIP();
+  display.setCursor(0,30);
+  display.setTextSize(1);
+  display.println(theIP);//print the ip on the OLED
+  display.display(); // Make sure to add this line to update the display
+  delay(10000);
 
   // Start the NTP client
   timeClient.begin();
@@ -73,10 +87,10 @@ void loop() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(0,0);
-  display.println("Time at the Farm:");
-  display.setTextSize(1.5);
-  display.setCursor(0, 20);
+  display.setCursor(0,12);
+  display.println("The Time is:");
+  display.setTextSize(1);
+  display.setCursor(0, 30);
   display.println(currentTime);
   display.display();
 
