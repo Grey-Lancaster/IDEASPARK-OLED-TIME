@@ -7,8 +7,8 @@
 #include <Fonts/FreeSans9pt7b.h>  // Include the header file for the custom font
 
 // Replace with your network details
-const char* ssid = "shop2";
-const char* password = "mine0313";
+const char* ssid = "your ap";
+const char* password = "your password";
 
 // OLED display settings
 #define SCREEN_WIDTH 128
