@@ -4,7 +4,8 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <NTPClient.h>
-#include <TimeLib.h>  // Include TimeLib to handle date and time functions
+#include <TimeLib.h>
+#include <Fonts/FreeSans9pt7b.h>  // Include the FreeSans9pt7b font
 
 // Replace with your network details
 const char* ssid = "shop2";
@@ -31,8 +32,9 @@ void setup() {
     Serial.println(F("SSD1306 allocation failed"));
     for (;;);
   }
-  
+
   display.clearDisplay();
+  display.setFont(&FreeSans9pt7b);  // Set the custom font
   display.setTextSize(1);
   display.setTextColor(WHITE);
 
@@ -43,9 +45,8 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("WiFi connected");
+
   display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
   display.setCursor(0,0);
   display.println("Wi-Fi Connected");
   display.display();
@@ -81,31 +82,33 @@ void loop() {
   // Clear the display buffer
   display.clearDisplay();
 
-  // Display time
+  // Set up the display with the custom font and size
+  display.setFont(&FreeSans9pt7b);
   display.setTextSize(1);
-  display.setCursor(0,0);
-  display.print("Time: ");
-  if (currentHour < 10) display.print('0');
+
+  // Display time
+  display.setCursor(0, 15);
+  display.print(currentHour < 10 ? "0" : "");
   display.print(currentHour);
   display.print(":");
-  if (currentMinute < 10) display.print('0');
+  display.print(currentMinute < 10 ? "0" : "");
   display.print(currentMinute);
   display.print(":");
-  if (currentSecond < 10) display.print('0');
+  display.print(currentSecond < 10 ? "0" : "");
   display.print(currentSecond);
   display.print(" ");
   display.println(am_pm);
 
   // Display the day of the week
-  display.print("Day: ");
+  display.setCursor(0, 35);
   display.println(dayStr(dayOfWeek));
 
   // Display the date in MM/DD/YYYY format
-  display.print("Date: ");
-  if (currentMonth < 10) display.print('0');
+  display.setCursor(0, 60);
+  display.print(currentMonth < 10 ? "0" : "");
   display.print(currentMonth);
   display.print("/");
-  if (currentDay < 10) display.print('0');
+  display.print(currentDay < 10 ? "0" : "");
   display.print(currentDay);
   display.print("/");
   display.println(currentYear);
