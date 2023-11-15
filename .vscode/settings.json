@@ -1,4 +1,3 @@
 {
-    "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/greyl/Documents/PlatformIO/Projects/IDEASPARK-OLED-TIME/.pio/libdeps/nodemcuv2/Adafruit BusIO"
+    "cmake.configureOnOpen": false
 }
