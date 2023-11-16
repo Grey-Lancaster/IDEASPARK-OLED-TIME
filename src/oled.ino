@@ -48,18 +48,37 @@ void setup() {
 
   // Display "Wi-Fi Connected" message
   display.clearDisplay();
-  display.setCursor(0,14);
+  display.setCursor(0,13);
   display.println("Connected");
-  //display.display();
-  //delay(2000); // Show the message for 2 seconds
+  display.display();
+  delay(4000); // Show the message for 2 seconds
+    // Display the local IP address
+  display.clearDisplay();
+  display.setCursor(0,13);
+  display.print("IP: ");
+  //display.println(WiFi.localIP());
+  display.setCursor(0, 30);
+  display.print("Gateway: ");
+ // display.println(WiFi.gatewayIP());
+  display.setCursor(0, 50);
+  display.print("DNS: ");
+ // display.println(WiFi.dnsIP());
+  display.display();
+  delay(5000); // Show the IP address for 5 seconds
 
   // Display the local IP address
- // display.clearDisplay();
-  display.setCursor(0,32);
- // display.print("IP: ");
+  display.clearDisplay();
+  display.setCursor(0,13);
+  //display.print("IP: ");
   display.println(WiFi.localIP());
+  display.setCursor(0, 30);
+ // display.print("Gateway: ");
+  display.println(WiFi.gatewayIP());
+  display.setCursor(0, 50);
+ // display.print("DNS: ");
+  display.println(WiFi.dnsIP());
   display.display();
-  delay(7000); // Show the IP address for 7 seconds
+  delay(5000); // Show the IP address for 5 seconds
 
   // Start the NTP client
   timeClient.begin();
