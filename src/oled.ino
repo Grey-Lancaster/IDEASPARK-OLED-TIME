@@ -46,11 +46,20 @@ void setup() {
   }
   Serial.println("WiFi connected");
 
+  // Display "Wi-Fi Connected" message
   display.clearDisplay();
-  display.setCursor(0,0);
-  display.println("Wi-Fi Connected");
+  display.setCursor(0,14);
+  display.println("Connected");
+  //display.display();
+  //delay(2000); // Show the message for 2 seconds
+
+  // Display the local IP address
+ // display.clearDisplay();
+  display.setCursor(0,32);
+ // display.print("IP: ");
+  display.println(WiFi.localIP());
   display.display();
-  delay(2000); // Show the message for 2 seconds
+  delay(7000); // Show the IP address for 7 seconds
 
   // Start the NTP client
   timeClient.begin();
