@@ -6,6 +6,7 @@
 #include <NTPClient.h>
 #include <TimeLib.h>
 #include <Fonts/FreeSans9pt7b.h>  // Include the FreeSans9pt7b font
+#include <Fonts/FreeSans12pt7b.h>  // Include 9pt font
 
 // Replace with your network details
 const char* ssid = "shop2";
@@ -51,7 +52,7 @@ void setup() {
   display.setCursor(0,13);
   display.println("Connected");
   display.display();
-  delay(4000); // Show the message for 2 seconds
+  delay(2000); // Show the message for 4 seconds
     // Display the local IP address
   display.clearDisplay();
   display.setCursor(0,13);
@@ -64,7 +65,7 @@ void setup() {
   display.print("DNS: ");
  // display.println(WiFi.dnsIP());
   display.display();
-  delay(5000); // Show the IP address for 5 seconds
+  delay(2000); // Show the IP address for 5 seconds
 
   // Display the local IP address
   display.clearDisplay();
@@ -78,7 +79,31 @@ void setup() {
  // display.print("DNS: ");
   display.println(WiFi.dnsIP());
   display.display();
+  delay(2000); // Show the IP address for 5 seconds
+
+
+  // Clear the display
+  display.clearDisplay();
+
+  // Set the default smaller font for the first part of the text
+  display.setFont(&FreeSans9pt7b); // Assuming you have a 9pt font
+  display.setTextSize(1); // Normal size for 7pt font
+  display.setCursor(0, 13);
+  display.println("   I AM THE");
+
+  // Set the larger font for 'WIZARD'
+  display.setFont(&FreeSans12pt7b); // Set to 12pt font
+  display.setTextSize(1); // Normal size for 12pt font
+  display.setCursor(0, 50); // Set cursor position for 'WIZARD'
+  display.println("  WIZARD");
+
+  // Update the display
+  display.display();
+  delay(5000); // Show the message for 5 seconds
+
+  display.display();
   delay(5000); // Show the IP address for 5 seconds
+
 
   // Start the NTP client
   timeClient.begin();
